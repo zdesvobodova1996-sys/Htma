@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTMA – Analýza minerálů z vlasů · Ženská Cykličnost</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --pink:#ed5891;--pink-light:#fce8f3;--pink-pale:#fff5fa;--pink-deep:#c4356d;
+  --dark:#2a1a22;--muted:#7a5a6a;--border:#f0c8de;--white:#ffffff;
+  --cream:#fffbfd;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--cream);color:var(--dark);line-height:1.7;font-size:16px;}
+
+/* ── HERO ── */
+.hero{
+  background:var(--dark);
+  padding:5rem 1.5rem 4rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(237,88,145,.18) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-block;font-size:11px;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--pink);border:1px solid rgba(237,88,145,.4);
+  padding:6px 22px;border-radius:100px;margin-bottom:2.5rem;
+}
+.hero-title{
+  font-family:var(--serif);font-size:clamp(44px,9vw,82px);
+  font-weight:300;color:var(--white);line-height:1.0;
+  letter-spacing:-.02em;margin-bottom:1.5rem;
+}
+.hero-title em{font-style:italic;color:var(--pink);}
+.hero-sub{
+  font-size:clamp(15px,2.5vw,18px);font-weight:300;
+  color:rgba(255,255,255,.6);max-width:540px;margin:0 auto 2.5rem;
+  line-height:1.75;
+}
+.hero-cta{
+  display:inline-block;background:var(--pink);color:var(--white);
+  font-size:15px;font-weight:500;padding:16px 44px;
+  border-radius:100px;text-decoration:none;letter-spacing:.02em;
+  transition:background .2s;
+}
+.hero-cta:hover{background:var(--pink-deep);}
+.hero-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:1rem;}
+
+/* ── ORNAMENT ── */
+.ornament{display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:2rem;}
+.ornament-line{width:50px;height:1px;background:var(--border);}
+.ornament-dot{width:5px;height:5px;border-radius:50%;background:var(--pink);opacity:.6;}
+
+/* ── SECTION WRAPPER ── */
+.section{max-width:700px;margin:0 auto;padding:4rem 1.5rem;}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:.75rem;}
+.section-title{font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:300;color:var(--dark);line-height:1.1;margin-bottom:1.5rem;}
+.section-title em{font-style:italic;color:var(--pink);}
+.prose{font-size:16px;color:#4a3040;line-height:1.85;margin-bottom:1.25rem;}
+
+/* ── KDO TO POTŘEBUJE ── */
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:2rem 0;}
+@media(max-width:540px){.who-grid{grid-template-columns:1fr;}}
+.who-item{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  padding:1.25rem 1.25rem 1.25rem 1rem;display:flex;align-items:flex-start;gap:.75rem;
+}
+.who-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);flex-shrink:0;margin-top:.45rem;}
+.who-text{font-size:14px;color:#3a2030;line-height:1.6;}
+
+/* ── CO ODHALÍ ── */
+.reveals-section{background:var(--dark);padding:4rem 1.5rem;}
+.reveals-inner{max-width:700px;margin:0 auto;}
+.reveals-title{font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:300;color:var(--white);line-height:1.1;margin-bottom:.5rem;}
+.reveals-title em{font-style:italic;color:var(--pink);}
+.reveals-sub{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:2.5rem;}
+.reveals-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:540px){.reveals-grid{grid-template-columns:1fr;}}
+.reveal-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(237,88,145,.2);
+  border-radius:18px;padding:1.5rem;
+}
+.reveal-icon{font-size:22px;margin-bottom:.75rem;}
+.reveal-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--white);margin-bottom:.4rem;}
+.reveal-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65;}
+
+/* ── VS TABULKA ── */
+.vs-section{background:var(--pink-pale);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 1.5rem;}
+.vs-inner{max-width:700px;margin:0 auto;}
+.vs-table{width:100%;border-collapse:collapse;margin-top:1.5rem;}
+.vs-table th{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1rem;text-align:left;border-bottom:2px solid var(--border);}
+.vs-table th:first-child{color:var(--muted);width:45%;}
+.vs-table th:nth-child(2){color:var(--muted);}
+.vs-table th:nth-child(3){color:var(--pink);}
+.vs-table td{font-size:14px;padding:.75rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
+.vs-table td:first-child{color:var(--muted);font-style:italic;}
+.vs-table td:nth-child(2){color:#4a3040;}
+.vs-table td:nth-child(3){color:var(--dark);font-weight:500;}
+.vs-table tr:last-child td{border-bottom:none;}
+
+/* ── JAK TO PROBÍHÁ ── */
+.process-section{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 1.5rem;}
+.process-inner{max-width:700px;margin:0 auto;}
+.steps{display:flex;flex-direction:column;gap:0;margin-top:2rem;}
+.step{display:grid;grid-template-columns:56px 1fr;gap:1.5rem;position:relative;padding-bottom:2.5rem;}
+.step:last-child{padding-bottom:0;}
+.step::before{
+  content:'';position:absolute;left:27px;top:56px;bottom:0;
+  width:2px;background:var(--border);
+}
+.step:last-child::before{display:none;}
+.step-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--pink-light);border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-family:var(--serif);font-size:22px;font-weight:300;color:var(--pink);
+  position:relative;z-index:1;
+}
+.step-content{}
+.step-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--dark);margin-bottom:.5rem;line-height:1.2;padding-top:.75rem;}
+.step-desc{font-size:14px;color:var(--muted);line-height:1.75;}
+.step-note{
+  display:inline-block;margin-top:.75rem;
+  font-size:12px;color:var(--pink);background:var(--pink-light);
+  border:1px solid var(--border);border-radius:100px;padding:4px 14px;
+}
+
+/* ── MINERÁLY & HORMONY ── */
+.minerals-section{background:var(--cream);border-top:1px solid var(--border);padding:4rem 1.5rem;}
+.minerals-inner{max-width:700px;margin:0 auto;}
+.mineral-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;}
+@media(max-width:540px){.mineral-cards{grid-template-columns:1fr;}}
+.mineral-card{
+  background:var(--white);border:1px solid var(--border);border-radius:18px;
+  padding:1.5rem;border-left:3px solid var(--pink);
+}
+.mineral-name{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--dark);margin-bottom:.3rem;}
+.mineral-link{font-size:12px;color:var(--pink);font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem;display:block;}
+.mineral-desc{font-size:13px;color:var(--muted);line-height:1.65;}
+
+/* ── HTMA VIZUÁL ── */
+.htma-visual{background:var(--dark);padding:4rem 1.5rem;text-align:center;}
+.htma-visual-inner{max-width:700px;margin:0 auto;}
+.htma-img-wrap{
+  margin:2rem auto 0;max-width:560px;
+  border-radius:20px;overflow:hidden;
+  border:1px solid rgba(237,88,145,.2);
+}
+.htma-img-wrap img{width:100%;display:block;}
+.htma-img-caption{font-size:12px;color:rgba(255,255,255,.35);margin-top:1rem;font-style:italic;}
+
+/* ── SLIDER REFERENCE ── */
+.reviews-section{background:var(--pink-pale);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 0;}
+.reviews-inner{max-width:700px;margin:0 auto;padding:0 1.5rem;}
+.slider-wrap{position:relative;margin-top:2rem;overflow:hidden;}
+.slider-track{
+  display:flex;gap:1.25rem;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;padding:0 1.5rem 1rem;
+  cursor:grab;
+}
+.slider-track::-webkit-scrollbar{display:none;}
+.slider-track.grabbing{cursor:grabbing;}
+.review-card{
+  background:var(--white);border:1px solid var(--border);border-radius:18px;
+  padding:1.75rem;display:flex;flex-direction:column;gap:.75rem;
+  min-width:300px;max-width:320px;flex-shrink:0;
+  scroll-snap-align:start;
+}
+.review-stars{color:var(--pink);font-size:14px;letter-spacing:.1em;}
+.review-text{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--dark);line-height:1.7;flex:1;}
+.review-name{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+.slider-nav{display:flex;justify-content:center;gap:.5rem;margin-top:1.5rem;}
+.slider-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:background .2s;padding:0;}
+.slider-dot.active{background:var(--pink);}
+.slider-arrows{display:flex;justify-content:center;gap:1rem;margin-top:1rem;}
+.slider-arrow{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--white);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;color:var(--pink);
+  transition:background .2s;
+}
+.slider-arrow:hover{background:var(--pink-light);}
+
+/* ── FORMULÁŘ / CTA ── */
+.cta-section{background:var(--pink);padding:5rem 1.5rem;text-align:center;}
+.cta-inner{max-width:600px;margin:0 auto;}
+.cta-title{font-family:var(--serif);font-size:clamp(32px,6vw,56px);font-weight:300;color:var(--white);line-height:1.1;margin-bottom:1rem;}
+.cta-title em{font-style:italic;color:rgba(255,255,255,.7);}
+.cta-sub{font-size:15px;color:rgba(255,255,255,.7);max-width:460px;margin:0 auto 2.5rem;line-height:1.75;}
+.cta-btn-white{
+  display:inline-block;background:var(--white);color:var(--pink);
+  font-size:15px;font-weight:500;padding:16px 44px;
+  border-radius:100px;text-decoration:none;letter-spacing:.02em;
+  transition:opacity .2s;
+}
+.cta-btn-white:hover{opacity:.9;}
+.cta-note{font-size:12px;color:rgba(255,255,255,.5);margin-top:1rem;}
+
+/* ── O MNĚ ── */
+.about-section{background:var(--white);border-top:1px solid var(--border);padding:4rem 1.5rem;}
+.about-inner{max-width:700px;margin:0 auto;}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);text-align:center;padding:1.5rem;color:rgba(255,255,255,.3);font-size:12px;}
+footer a{color:rgba(255,255,255,.4);text-decoration:none;}
+footer a:hover{color:var(--pink);}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Analýza minerálů z vlasů · HTMA</div>
+  <h1 class="hero-title">Tvoje vlasy vědí,<br>co <em>krev přehlédla</em></h1>
+  <p class="hero-sub">HTMA je neinvazivní test, který odhalí dlouhodobý stav tvého těla — minerály, hormony, stres, detoxikace.<br>Jeden vzorek vlasů = kompletní mapa.</p>
+  <a href="https://zdenka-svobodova.involve.me/htma-vstupni-dotaznik" target="_blank" class="hero-cta">Chci HTMA analýzu — vyplnit dotazník</a>
+  <p class="hero-note">Začínáme dotazníkem · Zdarma · Bez závazku</p>
+</section>
+
+<!-- PROČ HTMA -->
+<div class="section">
+  <div class="ornament"><div class="ornament-line"></div><div class="ornament-dot"></div><div class="ornament-line"></div></div>
+  <p class="section-label">Proč HTMA</p>
+  <h2 class="section-title">Čísla v normě,<br>ale ty se <em>normálně necítíš?</em></h2>
+  <p class="prose">Krev se snaží udržet stabilní rovnováhu za každou cenu, i na úkor tkání. Takže i když máš výsledky „v normě", může ti ve skutečnosti v buňkách něco chybět. Právě tady má HTMA obrovskou výhodu.</p>
+  <p class="prose">Vlasy během růstu ukládají minerály jako biologický zápisník. Co putuje tvým tělem, se odráží ve struktuře vlasu a to po dobu týdnů. Dostaneš dlouhodobý obraz, ne jen momentku.</p>
+
+  <p class="section-label" style="margin-top:2rem;">Tohle HTMA ukazuje — krev ne</p>
+  <div class="who-grid">
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Skutečné zásoby minerálů v buňkách, a ne jen to, co koluje v krvi</div></div>
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Jak tělo dlouhodobě reaguje na stres a zátěž nervového systému</div></div>
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Přítomnost těžkých kovů (rtuť, olovo, hliník), které krevní testy přehlédnou</div></div>
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Zda jsi ve fázi vyčerpání nebo přetížení — a co s tím</div></div>
+  </div>
+</div>
+
+<!-- CO ODHALÍ -->
+<section class="reveals-section">
+  <div class="reveals-inner">
+    <div class="ornament"><div class="ornament-line" style="background:rgba(255,255,255,.15);"></div><div class="ornament-dot"></div><div class="ornament-line" style="background:rgba(255,255,255,.15);"></div></div>
+    <h2 class="reveals-title">Co HTMA <em>odhalí</em></h2>
+    <p class="reveals-sub">Jeden test. Mnoho odpovědí, které jsi možná hledala roky.</p>
+    <div class="reveals-grid">
+      <div class="reveal-card">
+        <div class="reveal-icon">⚖️</div>
+        <p class="reveal-title">Minerální rovnováha</p>
+        <p class="reveal-desc">Až 35 minerálů a stopových prvků — vápník, hořčík, zinek, železo, sodík, draslík a další. Přesně vidíš, co chybí a co přebývá.</p>
+      </div>
+      <div class="reveal-card">
+        <div class="reveal-icon">🌸</div>
+        <p class="reveal-title">Hormonální spojení</p>
+        <p class="reveal-desc">Minerály přímo ovlivňují progesteron, estrogen a štítnou žlázu. Test ukáže, kde je kořen hormonální nerovnováhy.</p>
+      </div>
+      <div class="reveal-card">
+        <div class="reveal-icon">⚡</div>
+        <p class="reveal-title">Energie & nadledvinky</p>
+        <p class="reveal-desc">Jak funguje tvůj metabolismus, osa nadledvinky–štítná žláza a zda jsi ve fázi vyčerpání nebo přetížení.</p>
+      </div>
+      <div class="reveal-card">
+        <div class="reveal-icon">🧪</div>
+        <p class="reveal-title">Toxické kovy</p>
+        <p class="reveal-desc">Rtuť, olovo, hliník — těžké kovy, které narušují hormonální zdraví a energii. Krev je nezachytí, vlasy ano.</p>
+      </div>
+      <div class="reveal-card">
+        <div class="reveal-icon">🍃</div>
+        <p class="reveal-title">Detoxikace & játra</p>
+        <p class="reveal-desc">Jak efektivně tvoje tělo zvládá detoxikační procesy a zda je potřeba játra podpořit.</p>
+      </div>
+      <div class="reveal-card">
+        <div class="reveal-icon">🧠</div>
+        <p class="reveal-title">Nervový systém & nálada</p>
+        <p class="reveal-desc">Stres, úzkost, spánek, výkyvy nálad — to vše má minerální kořeny. Test ukáže, kde začít.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRO KOHO -->
+<div class="section">
+  <div class="ornament"><div class="ornament-line"></div><div class="ornament-dot"></div><div class="ornament-line"></div></div>
+  <p class="section-label">Pro koho je HTMA</p>
+  <h2 class="section-title">Poznáváš <em>sebe?</em></h2>
+  <p class="prose">HTMA je pro tebe, pokud:</p>
+  <div class="who-grid">
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Trápí tě PMS, nepravidelná menstruace nebo hormonální nerovnováha</div></div>
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Máš problémy se štítnou žlázou — hypotyreóza, Hashimoto</div></div>
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Bojuješ s chronickou únavou, špatným spánkem nebo vyhořením</div></div>
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Chceš optimalizovat výživu a suplementaci — cíleně, ne naslepo</div></div>
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Máš podezření na těžké kovy nebo špatnou detoxikaci</div></div>
+    <div class="who-item"><div class="who-dot"></div><div class="who-text">Cítíš, že tvoje výsledky jsou „v normě", ale ty se normálně necítíš</div></div>
+  </div>
+</div>
+
+<!-- KREV VS HTMA -->
+<section class="vs-section">
+  <div class="vs-inner">
+    <div class="ornament"><div class="ornament-line"></div><div class="ornament-dot"></div><div class="ornament-line"></div></div>
+    <p class="section-label">Srovnání</p>
+    <h2 class="section-title" style="font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:300;color:var(--dark);line-height:1.1;margin-bottom:.5rem;">Krev vs. <em>HTMA</em></h2>
+    <p class="prose">Krevní testy jsou skvělé, ale ukazují jen momentální stav. HTMA ho doplňuje pohledem, který krev neumí.</p>
+    <table class="vs-table">
+      <thead>
+        <tr>
+          <th>Co zjistíš</th>
+          <th>Krevní testy</th>
+          <th>HTMA analýza</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Časové okno</td>
+          <td>Aktuální stav — momentka</td>
+          <td>Poslední týdny — dlouhodobý obraz</td>
+        </tr>
+        <tr>
+          <td>Minerály v tkáních</td>
+          <td>Krev udržuje zdánlivou normu</td>
+          <td>Odhalí skutečné zásoby v buňkách</td>
+        </tr>
+        <tr>
+          <td>Těžké kovy</td>
+          <td>Velmi omezené</td>
+          <td>Detailní přehled (rtuť, olovo, hliník…)</td>
+        </tr>
+        <tr>
+          <td>Stres & nadledvinky</td>
+          <td>Není vidět dlouhodobě</td>
+          <td>Vzorce zátěže a vyčerpání</td>
+        </tr>
+        <tr>
+          <td>Stabilita výsledků</td>
+          <td>Kolísá podle denní doby a jídla</td>
+          <td>Stabilní, méně ovlivněná okolnostmi</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:2rem;background:var(--white);border:1px solid var(--border);border-radius:18px;padding:1.75rem;">
+      <p style="font-family:var(--serif);font-size:20px;font-weight:300;color:var(--dark);margin-bottom:.5rem;">Nejlepší výsledky? <em style="color:var(--pink);">Kombinace obojího.</em></p>
+      <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:1.25rem;">Ráda pracuji s výsledky krevních testů i HTMA zároveň, neboť dohromady dávají nejpřesnější obraz toho, co se v tvém těle děje. Proto nabízím ve spolupráci se Synlabem možnost objednat si naše balíčky krevních testů se slevou 15 %.</p>
+      <a href="https://zdesvobodova1996-sys.github.io/krevnitesty-/landing_page_krevni_testy.html" target="_blank" style="display:inline-block;background:var(--pink);color:var(--white);font-size:14px;font-weight:500;padding:12px 28px;border-radius:100px;text-decoration:none;letter-spacing:.02em;">Krevní testy se Synlabem</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:.6rem;font-style:italic;">Odkaz na balíčky bude brzy doplněn.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MINERÁLY & HORMONY -->
+<section class="minerals-section">
+  <div class="minerals-inner">
+    <div class="ornament"><div class="ornament-line"></div><div class="ornament-dot"></div><div class="ornament-line"></div></div>
+    <p class="section-label">Jak to spolu souvisí</p>
+    <h2 class="section-title" style="font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:300;color:var(--dark);line-height:1.1;margin-bottom:.5rem;">Minerály <em>a hormony</em></h2>
+    <p class="prose">Každý minerál má přímý vliv na tvé hormony. Tady jsou ta nejdůležitější spojení:</p>
+    <div class="mineral-cards">
+      <div class="mineral-card">
+        <p class="mineral-name">Zinek & progesteron</p>
+        <p class="mineral-desc">Nízký zinek je přímo spojován s nízkou hladinou progesteronu — nepravidelná menstruace, PMS, neplodnost.</p>
+      </div>
+      <div class="mineral-card">
+        <p class="mineral-name">Měď & estrogenová dominance</p>
+        <p class="mineral-desc">Nadbytek mědi přispívá k nadměrnému estrogenu — bolestivá menstruace, citlivost prsou, výkyvy nálad.</p>
+      </div>
+      <div class="mineral-card">
+        <p class="mineral-name">Sodík, draslík & nadledvinky</p>
+        <p class="mineral-desc">Chronický stres vyčerpává sodík a draslík — únava, úzkost, problémy se spánkem.</p>
+      </div>
+      <div class="mineral-card">
+        <p class="mineral-name">Vápník & štítná žláza</p>
+        <p class="mineral-desc">Vysoká hladina vápníku může blokovat funkci štítné žlázy — pomalý metabolismus, přibývání na váze.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JAK TO PROBÍHÁ -->
+<section class="process-section">
+  <div class="process-inner">
+    <div class="ornament"><div class="ornament-line"></div><div class="ornament-dot"></div><div class="ornament-line"></div></div>
+    <p class="section-label">Průběh spolupráce</p>
+    <h2 class="section-title" style="font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:300;color:var(--dark);line-height:1.1;margin-bottom:.5rem;">Jak to celé <em>probíhá</em></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <p class="step-title">Vyplníš dotazník</p>
+          <p class="step-desc">Začínáme dotazníkem — stačí ho vyplnit a pár otázek o tvých obtížích, cyklu a zdravotním stavu. Náš tým ho projde a následně se s tebou spojí a probereme další kroky a zaslání sady pro odběr.</p>
+          <span class="step-note">Zdarma · Bez závazku · Dotazník online</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <p class="step-title">Odběr vzorku vlasů</p>
+          <p class="step-desc">Jednoduchý, rychlý a neinvazivní. Malý vzorek ze zadní části hlavy, co nejblíže k pokožce. Na účesu to nepoznáš. Po celou dobu ti je k dispozici moje asistentka Terka.</p>
+          <span class="step-note">Doma · 5 minut · Bez jehel</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <p class="step-title">Laboratorní analýza v USA</p>
+          <p class="step-desc">Vzorek se odesílá do specializované laboratoře, kde proběhne detailní analýza minerálů, stopových prvků, těžkých kovů a jejich vzájemných poměrů. Právě poměry dávají hlubší kontext.</p>
+          <span class="step-note">Výsledky za 3–4 týdny</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <p class="step-title">Vyhodnocení & plán na míru</p>
+          <p class="step-desc">Navazující 90minutová konzultace. Výsledky vyhodnocuji v kontextu tvého cyklu, stravy, stresu a životního stylu. Dostaneš konkrétní plán — strava, suplementace, detoxikace, režim — přehledně zpracovaný v Google dokumentu.</p>
+          <span class="step-note">90 minut · Plán v Google Docs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- REFERENCE – SLIDER -->
+<section class="reviews-section">
+  <div class="reviews-inner">
+    <div class="ornament"><div class="ornament-line"></div><div class="ornament-dot"></div><div class="ornament-line"></div></div>
+    <p class="section-label" style="text-align:center;">Co říkají klientky</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:300;color:var(--dark);line-height:1.1;margin-bottom:.5rem;text-align:center;">Reference <em>klientek</em></h2>
+  </div>
+  <div class="slider-wrap">
+    <div class="slider-track" id="sliderTrack">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Překvapilo mě, jak komplexní odpovědi se z tohoto testu dají získat. Úplně největší wow moment pro mě bylo zjištění přebytku vápníku — že jsem v podstatě uvězněná ve vápníkové skořápce. Na konci přišel jasný postup, jak teď se vším tím zjištěním naložit."</p>
+        <p class="review-name">— Tereza Šimerová</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Byl to pro mě obrovský pocit úlevy – že nejsem hypochondr, ale že jen pravdivě vnímám signály svého těla. Rozbor mi řekl mnohem víc, než jsem čekala. Odkryl souvislosti a hlubší příčiny potíží, na které bych nepřišla ani já sama, ani lékaři."</p>
+        <p class="review-name">— Veronika Haničincová</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Z naší konzultace jsem byla paf ještě několik dní potom. Najednou vám začne dávat smysl, proč se vám určité věci dějí, že máte sklon třeba k určitému chování, nemocem. HTMA bych doporučila všem, které zajímá, co se v jejich těle skutečně děje."</p>
+        <p class="review-name">— Tereza Gödrichová</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Cykly se mi zkrátily. Je to cesta na dlouhou trať u mě, ale každý malý krok mě posouvá. Zaměřila jsem se hodně na stres, začala vnímat své změny v průběhu měsíce a vnímám se již jinak, nevyčítám si nic a nejdu sama proti sobě."</p>
+        <p class="review-name">— Magna Binárová</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Oproti jiným testům mi přijde skvělé, že HTMA ukáže, jak na tom tělo je z dlouhodobější perspektivy. Dostala jsem propracovaný manuál, ke kterému se mohu vracet a čerpat z něj. Moje zakázka se tedy naplnila."</p>
+        <p class="review-name">— Lucie Papíková</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Každý, kdo se rozhodne do toho jít, tak má větší šanci co nejlépe a nejdříve pomoct svému tělu. Bez toho a tebe bych na to sama určitě nepřišla a akorát bych byla frustrovaná, že třeba vůbec nevidím výsledky."</p>
+        <p class="review-name">— Kateřina Kadlecová</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="slider-arrows">
+    <button class="slider-arrow" onclick="slide(-1)">←</button>
+    <button class="slider-arrow" onclick="slide(1)">→</button>
+  </div>
+  <div class="slider-nav" id="sliderNav"></div>
+</section>
+
+<!-- CTA / DOTAZNÍK -->
+<section class="cta-section" id="dotaznik">
+  <div class="cta-inner">
+    <div class="ornament"><div class="ornament-line" style="background:rgba(255,255,255,.3);"></div><div class="ornament-dot" style="background:rgba(255,255,255,.6);"></div><div class="ornament-line" style="background:rgba(255,255,255,.3);"></div></div>
+    <h2 class="cta-title">Připravená zjistit,<br>co ti <em>tělo říká?</em></h2>
+    <p class="cta-sub">Vyplněním dotazníku potvrzuješ zájem o HTMA analýzu. Náš tým se ti ozve a proberete následující kroky.</p>
+    <a href="https://zdenka-svobodova.involve.me/htma-vstupni-dotaznik" target="_blank" class="cta-btn-white">Vyplnit dotazník</a>
+  </div>
+</section>
+
+<!-- O MNĚ -->
+<section class="about-section">
+  <div class="about-inner">
+    <div class="ornament"><div class="ornament-line"></div><div class="ornament-dot"></div><div class="ornament-line"></div></div>
+    <p class="section-label">Kdo za tím stojí</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(28px,5vw,40px);font-weight:300;color:var(--dark);margin-bottom:.5rem;">Zdeňka Svobodová</h2>
+    <p style="font-size:13px;color:var(--muted);font-style:italic;margin-bottom:1.5rem;line-height:1.6;">Holistická koučka pro hormonální zdraví · Psychoneuroimunologie (IMH-C)<br>Certifikovaná brain-based koučka (ICF) · Poradkyně pro symptotermální metodu</p>
+    <p class="prose">S HTMA pracuji v rámci své kvalifikace a vždy ho propojuji s širším pohledem na ženské hormonální zdraví. Každá žena je jiná, a to, co pomůže jedné, nemusí být vhodné pro druhou.</p>
+    <p class="prose">HTMA není zázračný test, ale jedná se o velmi cenný kompas, tedy pokud se používá správně, s odborným vedením a v kontextu celého obrazu tvého zdraví.</p>
+    <p class="prose" style="font-style:italic;color:var(--pink);">Neřeším jen symptomy. Jdu po tom, z čeho vznikají.</p>
+    <div style="margin-top:2rem;">
+      <a href="https://zdenka-svobodova.involve.me/htma-vstupni-dotaznik" target="_blank" class="hero-cta">Vyplnit dotazník</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Ženská Cykličnost · Všechna práva vyhrazena ·
+  <a href="https://www.zenskacyklicnost.com/zasady-ochrany-udaju">Ochrana osobních údajů</a> · <a href="https://www.zenskacyklicnost.com/obchodni-podminky">Obchodní podmínky</a> ·
+  <a href="https://www.zenskacyklicnost.com/nase-odpovednost">Naše odpovědnost</a> ·
+    <a href="mailto:podpora@zenskacyklicnost.com">Kontakt</a>
+</footer>
+
+<script>
+const track = document.getElementById('sliderTrack');
+const cards = track.querySelectorAll('.review-card');
+const nav = document.getElementById('sliderNav');
+let current = 0;
+
+// Create dots
+cards.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goTo(i);
+  nav.appendChild(dot);
+});
+
+function goTo(index) {
+  current = Math.max(0, Math.min(index, cards.length - 1));
+  cards[current].scrollIntoView({behavior:'smooth', block:'nearest', inline:'start'});
+  nav.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+}
+
+function slide(dir) { goTo(current + dir); }
+
+// Drag to scroll
+let startX, scrollLeft, isDown = false;
+track.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; track.classList.add('grabbing'); });
+track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('grabbing'); });
+track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('grabbing'); });
+track.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX) * 1.5; });
+
+// Update dot on scroll
+track.addEventListener('scroll', () => {
+  const idx = Math.round(track.scrollLeft / (cards[0].offsetWidth + 20));
+  nav.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  current = idx;
+});
+</script>
+</body>
+</html>
